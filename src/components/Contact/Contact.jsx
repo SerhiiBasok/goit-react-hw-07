@@ -4,7 +4,6 @@ import { useDispatch } from "react-redux";
 import { deleteContact } from "../../redux/contactOps";
 
 const Contact = ({ contact }) => {
-  тзь;
   const dispatch = useDispatch();
 
   const handleDelete = () => {
