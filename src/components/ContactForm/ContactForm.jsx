@@ -1,30 +1,10 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { addContact } from "../../redux/contactsSlice";
-import { v4 as uuidv4 } from "uuid";
+import { addContact } from "../../redux/contactOps";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 import css from "../ContactForm/Form.module.css";
-
-const toastStyles = {
-  // Стилі тосту
-  ".Toastify__toast-container": {
-    zIndex: "9999",
-  },
-  ".Toastify__toast--error": {
-    backgroundColor: "#f44336",
-  },
-  ".Toastify__toast--error:hover": {
-    backgroundColor: "#d32f2f",
-  },
-  ".Toastify__toast-body": {
-    fontFamily: "Arial, sans-serif",
-    fontSize: "14px",
-    color: "#fff",
-  },
-};
-
 const ContactsForm = () => {
   const [name, setName] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
@@ -32,13 +12,10 @@ const ContactsForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    const id = uuidv4();
-
     if (name.trim() === "" || phoneNumber.trim() === "") {
       toast.error("Name and phone number are required.");
     } else {
-      dispatch(addContact({ id, name, phoneNumber }));
+      dispatch(addContact({ name, phoneNumber }));
       setName("");
       setPhoneNumber("");
     }
@@ -46,7 +23,7 @@ const ContactsForm = () => {
 
   return (
     <div>
-      <ToastContainer style={toastStyles} />
+      <ToastContainer />
       <form onSubmit={handleSubmit} className={css.form}>
         <input
           type="text"
